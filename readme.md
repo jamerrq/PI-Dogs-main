@@ -3,5 +3,5 @@
 #### By: [**jamerrq**](https://github.com/jamerrq)
 
 ## Server Tests
-![Server Tests](info/imgs/tests1.png)
-![Server Tests](info/imgs/tests2.png)
+![Server Tests](/imgs/tests1.png)
+![Server Tests](/imgs/tests2.png)
