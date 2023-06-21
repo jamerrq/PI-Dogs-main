@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
+                allowNull: false,
             },
             image: {
                 type: DataTypes.STRING,
@@ -30,6 +31,9 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            idApi: {
+                type: DataTypes.INTEGER,
+            }
         },
         {
             timestamps: false,
