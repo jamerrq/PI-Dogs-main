@@ -20,7 +20,13 @@ const postDogTest = {
     ...createDogTest,
     name: 'Henry Dog',
     image: 'https://m.media-amazon.com/images/I/61JNFVu5U+L._AC_UF1000,1000_QL80_.jpg',
-    temperaments: ['Loyal', 'Intelligent', 'Courageous', 'Alert', 'Confident', 'Watchful', 'Fearless', 'Aggressive', 'Obedient', 'Dominant'],
+    temperaments: ["Loyal", "Intelligent", "Courageous", "Alert", "Confident", "Watchful", "Fearless", "Aggressive", "Obedient", "Dominant"],
+};
+
+const putDogTest = {
+    ...createDogTest,
+    name: 'Put Dog Test',
+    image: 'https://i.redd.it/h55w432gc9x41.jpg',
 };
 
 
@@ -53,7 +59,6 @@ describe('GET Dogs routes', () => {
         it('should get an array with length 1', () =>
             agent.get('/dogs?name=Affenpinscher').then((res) => {
                 expect(res.body).to.be.an('array');
-                // console.log(res.body)
                 expect(res.body).to.have.lengthOf(1);
             })
         );
@@ -74,6 +79,7 @@ describe('GET Dogs routes', () => {
             })
         );
     });
+
 });
 
 
@@ -121,6 +127,79 @@ describe('GET Temperaments routes', () => {
                 expect(res.body).to.have.lengthOf.above(0);
             })
         );
+    });
+
+});
+
+
+describe('PUT Dogs routes', () => {
+
+    let dbId;
+
+    before(() => conn.authenticate()
+        .then(() => conn.sync({ force: true })).then(() => Dog.create(createDogTest)).then((dog) => {
+            dbId = dog.id;
+        })
+        .catch((err) => {
+            console.error('Unable to connect to the database:', err);
+        })
+    );
+
+    describe('PUT /dogs/:id', () => {
+        it('should get 200', () => {
+            agent.put(`/dogs/${dbId}`).send(putDogTest).expect(200);
+        });
+        it('should get an object with the correct properties', () =>
+            agent.put(`/dogs/${dbId}`).send(putDogTest).then((res) => {
+                expect(res.body.name).to.be.equal(putDogTest.name);
+                expect(res.body.image).to.be.equal(putDogTest.image);
+                expect(res.body.height).to.be.equal(putDogTest.height);
+                expect(res.body.weight).to.be.equal(putDogTest.weight);
+                expect(res.body.life_span).to.be.equal(putDogTest.life_span);
+            }
+            ));
+    });
+
+});
+
+
+describe('DELETE Dogs routes', () => {
+
+    let dbId;
+
+    before(() => conn.authenticate()
+        .then(() => conn.sync({ force: true })).then(() => Dog.create(createDogTest)).then((dog) => {
+            dbId = dog.id;
+        })
+        .catch((err) => {
+            console.error('Unable to connect to the database:', err);
+        })
+    );
+
+    describe('DELETE /dogs/:id', () => {
+
+        it('should get 200 and have the correct properties', () =>
+            agent.delete(`/dogs/${dbId}`).expect(200)
+                .then((res) => {
+                    expect(res.body).to.be.an('object');
+                    expect(res.body.name).to.be.equal(createDogTest.name);
+                    expect(res.body.image).to.be.equal(createDogTest.image);
+                    expect(res.body.height).to.be.equal(createDogTest.height);
+                    expect(res.body.weight).to.be.equal(createDogTest.weight);
+                    expect(res.body.life_span).to.be.equal(createDogTest.life_span);
+                }),
+        );
+
+        it('should get 404', () =>
+            agent.delete(`/dogs/${dbId}`).expect(404)
+        );
+
+        it('should be deleted from the database', () =>
+            Dog.findByPk(dbId).then((dog) => {
+                expect(dog).to.be.equal(null);
+            })
+        );
+
     });
 
 });
