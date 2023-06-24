@@ -105,6 +105,25 @@ describe('POST Dogs routes', () => {
                 })
         );
     });
+
+    // describe('POST /dogs', () => {
+    //     it('should create a dog in the database and this must have got ' +
+    //         'the correct temperaments associated', () => {
+    //             agent.post('/dogs').send(postDogTest).expect(201)
+    //                 .then((res) => {
+    //                     expect(res.body).to.be.an('object');
+    //                     expect(res.body).to.have.property('name');
+    //                     expect(res.body).to.have.property('image');
+    //                     expect(res.body).to.have.property('height');
+    //                     expect(res.body).to.have.property('weight');
+    //                     expect(res.body).to.have.property('life_span');
+    //                     expect(res.body).to.have.property('temperaments');
+    //                     expect(res.body.temperaments).to.be.an('array');
+    //                     expect(res.body.temperaments).to.have.lengthOf(postDogTest.temperaments.length);
+    //                     expect(res.body.temperaments).to.have.members(postDogTest.temperaments);
+    //                 });
+    //         });
+    // });
 });
 
 

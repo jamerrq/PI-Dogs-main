@@ -34,7 +34,11 @@ router.post('/', async (req, res) => {
         }));
         // Asociamos los temperamentos al perro
         await dog.addTemperaments(temperamentsCreated);
-        return res.status(201).json(dog);
+        const dogWithTemperaments = {
+            ...dog.dataValues,
+            temperaments: temperamentsCreated.map(temperament => temperament.name).join(', '),
+        };
+        return res.status(201).json(dogWithTemperaments);
     }
     catch (error) {
         console.log(error);

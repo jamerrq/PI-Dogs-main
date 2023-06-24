@@ -1,13 +1,23 @@
 const axios = require('axios');
-const { API_KEY } = process.env;
-const { Dog } = require('../db.js');
+require('dotenv').config();
+const { API_KEY, API_ENV } = process.env;
+const { Dog, Temperament } = require('../db.js');
 
 
 let dogsApi = [];
 let dogsDb = [];
 let temperaments = [];
 let apiInfoLoaded = false;
-let dbInfoLoaded = false;
+// let dbInfoLoaded = false;
+
+
+const testingDog = {
+    name: 'DRACULA BOY',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Thierry_Henry_%2851649035951%29_%28cropped%29.jpg',
+    height: '25 - 30',
+    weight: '6 - 10',
+    life_span: '12 - 14 years',
+};
 
 
 const getDogsApi = async () => {
@@ -44,9 +54,20 @@ const getDogsApi = async () => {
 
 const getDogsDb = async () => {
 
-    if (dbInfoLoaded) return dogsDb;
+    // if (dbInfoLoaded) return dogsDb;
     try {
-        dogsDb = await Dog.findAll();
+        dogsDb = await Dog.findAll({
+            include: [
+                {
+                    model: Temperament,
+                    attributes: ["name"],
+                    through: {
+                        attributes: [],
+                    },
+                },
+            ],
+        });
+        // console.log('dogsDb', dogsDb);
         dbInfoLoaded = true;
         return dogsDb;
     } catch (error) {
@@ -61,9 +82,36 @@ const getDogsDb = async () => {
 const getAllDogs = async () => {
 
     try {
-        const dogsApi = apiInfoLoaded ? await getDogsApi() : await getDogsApi();
-        const dogsDb = dbInfoLoaded ? await getDogsDb() : await getDogsDb();
-        const allDogs = dogsApi.concat(dogsDb);
+        console.log('ENVIRONMENT:', API_ENV);
+        if (API_ENV === 'testing') {
+            await Dog.create(testingDog);
+            console.log('TESTING DOG CREATED');
+        };
+        const dogsApi = await getDogsApi();
+        const dogsDb = await getDogsDb();
+        // console.log('dogsApi', dogsApi);
+        console.log('DOGS IN DB:', dogsDb.length);
+        // console.log(typeof dogsDb[0], Object.keys(dogsDb[0]));
+        const dogsFromDb = dogsDb.map(dog => {
+
+            let dogTemperaments = dog.temperaments.map(temperament => temperament.name);
+            dogTemperaments.forEach(temperament => {
+                if (!temperaments.includes(temperament)) temperaments.push(temperament);
+            });
+            // console.log('dogTemperaments', dogTemperaments);
+            return {
+                id: dog.id,
+                name: dog.name,
+                image: dog.image,
+                temperament: dogTemperaments.join(', '),
+                weight: dog.weight,
+                height: dog.height,
+                life_span: dog.life_span
+            };
+
+        });
+        const allDogs = dogsFromDb.concat(dogsApi);
+        console.log('ALL DOGS:', allDogs.length);
         return allDogs;
     } catch (error) {
         console.log('Error in getAllDogs()');

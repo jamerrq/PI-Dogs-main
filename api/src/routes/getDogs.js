@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
     // console.log('Ruta /dogs');
     try {
         const dogs = await getAllDogs();
+        // console.log(dogs);
         // Es momento de filtrar por name si es que se envió el query param
         const { name } = req.query;
         if (name) {
