@@ -1,0 +1,21 @@
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+.home {
+    padding-top: 50px;
+    height: 100%;
+    width: 100%;
+    /* background: url("https://i.imgur.com/f1jJPBz.jpg"); */
+    /* background: url('https://i.imgur.com/SJJPX9P.jpg'); */
+    /* background: url('https://i.imgur.com/CplaOhg.jpg'); */
+    background: url('https://i.redd.it/emnv93i496x41.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    /* add transition */
+    transition: background-image 0.5s ease-in-out;
+    gap: 5px;
+}

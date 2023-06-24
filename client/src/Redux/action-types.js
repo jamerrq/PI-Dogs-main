@@ -1,0 +1,15 @@
+export const LOAD_DOGS = 'LOAD_DOGS';
+export const LOAD_TEMPERAMENTS = 'LOAD_TEMPERAMENTS';
+export const LOAD_DOG_DETAIL = 'LOAD_DOG_DETAIL';
+export const FILTER_BY_TEMPERAMENT = 'FILTER_BY_TEMPERAMENT';
+export const FILTER_BY_NAME = 'FILTER_BY_NAME';
+export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT';
+export const ORDER_BY_HEIGHT = 'ORDER_BY_HEIGHT';
+export const ORDER_BY_LIFE_SPAN = 'ORDER_BY_LIFE_SPAN';
+export const ORDER_BY_ID = 'ORDER_BY_ID';
+export const CREATE_DOG = 'CREATE_DOG';
+export const MODIFY_DOG = 'MODIFY_DOG';
+export const DELETE_DOG = 'DELETE_DOG';
+export const CLEAR_DOG_DETAIL = 'CLEAR_DOG_DETAIL';
+export const CLEAR_FILTERS = 'CLEAR_FILTERS';

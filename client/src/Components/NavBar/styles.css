@@ -1,0 +1,150 @@
+.navbar {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8%;
+    z-index: 1;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-input {
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 5px;
+    font-size: 18px;
+    font-family: 'Fira Sans', sans-serif;
+    text-align: center;
+}
+
+#search-button,
+#logout-button,
+#create-button {
+    width: 15%;
+    height: 20%;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 5px;
+    font-size: 15px;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+    justify-self: center;
+    text-align: center;
+}
+
+
+#search-button:hover {
+    background-color: #282c34;
+    color: white;
+}
+
+#logout-button,
+#create-button {
+    background-color: #7E1717;
+    color: white;
+    width: 100%;
+    justify-self: flex-end;
+    color: white;
+    font-weight: bold;
+}
+
+#logout-button:hover {
+    background-color: red;
+}
+
+#create-button {
+    background-color: #3CFE00;
+    color: black;
+    width: 100%;
+    justify-self: flex-end;
+}
+
+#create-button:hover {
+    background-color: green;
+}
+
+#temp-filter,
+#origin-filter,
+.filter-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.navbar label {
+    font-size: 15px;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.sorter-div {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.sorter-div label {
+    font-size: 1rem;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+#sorter-options-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#sorter-label-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.navbar select {
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 1rem;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+    text-align: center;
+}
+
+.search-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filter-div {
+    height: 100%;
+    width: 100px;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
