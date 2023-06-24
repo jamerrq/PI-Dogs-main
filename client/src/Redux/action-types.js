@@ -13,3 +13,5 @@ export const MODIFY_DOG = 'MODIFY_DOG';
 export const DELETE_DOG = 'DELETE_DOG';
 export const CLEAR_DOG_DETAIL = 'CLEAR_DOG_DETAIL';
 export const CLEAR_FILTERS = 'CLEAR_FILTERS';
+export const PREV_PAGE = 'PREV_PAGE';
+export const NEXT_PAGE = 'NEXT_PAGE';

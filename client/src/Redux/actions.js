@@ -99,3 +99,21 @@ export const deleteDog = (id) => async (dispatch) => {
         payload: response.data,
     });
 };
+
+export const clearDogDetail = () => (dispatch) => {
+    return dispatch({
+        type: actions.CLEAR_DOG_DETAIL,
+    });
+};
+
+export const nextPage = () => (dispatch) => {
+    return dispatch({
+        type: actions.NEXT_PAGE,
+    });
+};
+
+export const prevPage = () => (dispatch) => {
+    return dispatch({
+        type: actions.PREV_PAGE,
+    });
+};

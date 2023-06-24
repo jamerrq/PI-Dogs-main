@@ -9,6 +9,7 @@ const initialState = {
     orderBy: '',
     filterByTemperament: '',
     filterByName: '',
+    currentPage: 1,
 };
 
 
@@ -139,6 +140,16 @@ function reducer(state = initialState, action) {
                 ...state,
                 allDogs: allDogsCopy2,
                 filteredDogs: allDogsCopy2,
+            };
+        case actions.PREV_PAGE:
+            return {
+                ...state,
+                currentPage: state.currentPage - 1,
+            };
+        case actions.NEXT_PAGE:
+            return {
+                ...state,
+                currentPage: state.currentPage + 1,
             };
         default:
             return state;

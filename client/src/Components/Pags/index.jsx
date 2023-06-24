@@ -6,7 +6,10 @@ import './styles.css';
 import { connect } from 'react-redux';
 
 // Actions
-import { loadDogs, loadTemperaments } from '../../Redux/actions';
+import {
+    loadDogs, loadTemperaments,
+    prevPage, nextPage
+} from '../../Redux/actions';
 
 // Cards Component
 import Card from '../Cards/Card';
@@ -18,15 +21,16 @@ class Pags extends React.Component {
         super(props);
         this.state = {
             // Page State
-            currentPage: 1,
+            currentPage: this.props.currentPage,
             // Items per Page
             itemsPerPage: 8,
             // Total Pages
             // totalPages: this.props.filteredDogs.length / 8,
             totalPages: 0,
-            // Cards State
-            cards: this.props.filteredDogs.slice(0, 8)
         };
+        let startIndex = this.state.currentPage * this.state.itemsPerPage - 8;
+        let endIndex = this.state.currentPage * this.state.itemsPerPage;
+        this.state.cards = this.props.filteredDogs.slice(startIndex, endIndex);
         // console.log(this.props);
         // console.log('Pags state:', this.state);
         this.getCards = this.getCards.bind(this);
@@ -48,6 +52,7 @@ class Pags extends React.Component {
             currentPage: this.state.currentPage - 1,
             cards: this.props.filteredDogs.slice(newStart, newEnd),
         });
+        this.props.prevPage();
         // console.log(this.props);
         // console.log(this.state);
     };
@@ -60,6 +65,7 @@ class Pags extends React.Component {
             currentPage: this.state.currentPage + 1,
             cards: this.props.filteredDogs.slice(newStart, newEnd),
         });
+        this.props.nextPage();
         // console.log(this.props);
         // console.log(this.state);
     };
@@ -110,6 +116,7 @@ const mapStateToProps = (state) => {
     return {
         // Filtered Cards
         filteredDogs: state.filteredDogs,
+        currentPage: state.currentPage,
     };
 };
 
@@ -117,6 +124,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadTemperaments: () => dispatch(loadTemperaments()),
         loadDogs: () => dispatch(loadDogs()),
+        prevPage: () => dispatch(prevPage()),
+        nextPage: () => dispatch(nextPage()),
     };
 };
 

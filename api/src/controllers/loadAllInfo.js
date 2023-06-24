@@ -82,15 +82,16 @@ const getDogsDb = async () => {
 const getAllDogs = async () => {
 
     try {
-        console.log('ENVIRONMENT:', API_ENV);
+        // console.log('ENVIRONMENT:', API_ENV);
         if (API_ENV === 'testing') {
+            console.log('TESTING ENVIRONMENT');
             await Dog.create(testingDog);
             console.log('TESTING DOG CREATED');
         };
         const dogsApi = await getDogsApi();
         const dogsDb = await getDogsDb();
         // console.log('dogsApi', dogsApi);
-        console.log('DOGS IN DB:', dogsDb.length);
+        // console.log('DOGS IN DB:', dogsDb.length);
         // console.log(typeof dogsDb[0], Object.keys(dogsDb[0]));
         const dogsFromDb = dogsDb.map(dog => {
 
@@ -111,7 +112,7 @@ const getAllDogs = async () => {
 
         });
         const allDogs = dogsFromDb.concat(dogsApi);
-        console.log('ALL DOGS:', allDogs.length);
+        // console.log('ALL DOGS:', allDogs.length);
         return allDogs;
     } catch (error) {
         console.log('Error in getAllDogs()');
