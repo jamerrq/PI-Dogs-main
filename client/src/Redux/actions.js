@@ -33,6 +33,13 @@ export const filterByTemperament = (temperament) => (dispatch) => {
     });
 };
 
+export const filterByOrigin = (origin) => (dispatch) => {
+    return dispatch({
+        type: actions.FILTER_BY_ORIGIN,
+        payload: origin,
+    });
+};
+
 export const filterByName = (name) => (dispatch) => {
     return dispatch({
         type: actions.FILTER_BY_NAME,
@@ -41,38 +48,45 @@ export const filterByName = (name) => (dispatch) => {
 };
 
 export const orderBy = (order) => (dispatch) => {
-    switch (order) {
+
+    console.log('ORDER BY', order);
+
+    let [criteria, direction] = order.split(',');
+    // console.log('CRITERIA', criteria);
+    // console.log('DIRECTION', direction);
+    switch (criteria) {
         case 'name':
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: order,
+                payload: direction,
             });
         case 'weight':
             return dispatch({
                 type: actions.ORDER_BY_WEIGHT,
-                payload: order,
+                payload: direction,
             });
         case 'height':
             return dispatch({
                 type: actions.ORDER_BY_HEIGHT,
-                payload: order,
+                payload: direction,
             });
         case 'life_span':
             return dispatch({
                 type: actions.ORDER_BY_LIFE_SPAN,
-                payload: order,
+                payload: direction,
             });
-        case 'id':
+        case 'default':
             return dispatch({
-                type: actions.ORDER_BY_ID,
-                payload: order,
+                type: actions.ORDER_BY_DEFAULT,
+                payload: direction,
             });
         default:
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: order,
+                payload: direction,
             });
     };
+
 };
 
 export const createDog = (dog) => async (dispatch) => {
@@ -115,5 +129,47 @@ export const nextPage = () => (dispatch) => {
 export const prevPage = () => (dispatch) => {
     return dispatch({
         type: actions.PREV_PAGE,
+    });
+};
+
+export const firstPage = () => (dispatch) => {
+    return dispatch({
+        type: actions.FIRST_PAGE,
+    });
+};
+
+export const lastPage = () => (dispatch) => {
+    return dispatch({
+        type: actions.LAST_PAGE,
+    });
+};
+
+export const setDogsPerPage = (dogsPerPage) => (dispatch) => {
+    return dispatch({
+        type: actions.SET_DOGS_PER_PAGE,
+        payload: dogsPerPage,
+    });
+};
+
+export const setTotalPages = (totalPages) => (dispatch) => {
+    return dispatch({
+        type: actions.SET_TOTAL_PAGES,
+        payload: totalPages,
+    });
+};
+
+export const searchByName = (name) => async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+    // console.log('SEARCH BY NAME RESPONSE', response);
+    const dogs = response.data || [];
+    if (dogs.length === 0) {
+        return dispatch({
+            type: actions.SEARCH_BY_NAME,
+            payload: {},
+        });
+    };
+    return dispatch({
+        type: actions.SEARCH_BY_NAME,
+        payload: dogs[0],
     });
 };

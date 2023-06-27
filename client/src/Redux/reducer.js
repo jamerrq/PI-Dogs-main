@@ -7,9 +7,17 @@ const initialState = {
     temperaments: [],
     filteredDogs: [],
     orderBy: '',
-    filterByTemperament: '',
+    filterByTemperament: 'all',
+    filterByOrigin: 'all',
     filterByName: '',
     currentPage: 1,
+    dogsPerPage: 8,
+    totalPages: 0,
+};
+
+
+const validateUUID = (uuid) => {
+    return /^[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}$/i.test(uuid);
 };
 
 
@@ -33,13 +41,43 @@ function reducer(state = initialState, action) {
                 dogDetail: action.payload,
             };
         case actions.FILTER_BY_TEMPERAMENT:
-            const allDogs = state.allDogs;
-            const filteredDogs = action.payload === 'All' ? allDogs : allDogs.filter(dog => dog.temperaments.includes(action.payload));
-            return {
+            // console.log('all dogs', state.allDogs);
+            if (action.payload === 'all') return {
                 ...state,
-                filteredDogs,
                 filterByTemperament: action.payload,
             };
+            const filteredByTemperament = state.filteredDogs.filter(dog => {
+                // console.log('dog temperament', dog.temperament);
+                return dog.temperament?.includes(action.payload);
+            });
+            return {
+                ...state,
+                filteredDogs: filteredByTemperament,
+                filterByTemperament: action.payload,
+            };
+        case actions.FILTER_BY_ORIGIN:
+            if (action.payload === 'all') return {
+                ...state,
+                filterByOrigin: action.payload,
+            };
+            const filteredByOrigin = state.filteredDogs.filter(dog => {
+                // console.log('dog idApi', dog.idApi);
+                // console.log('dog id', dog.id);
+                switch (action.payload) {
+                    case 'api':
+                        return !validateUUID(dog.id);
+                    case 'created':
+                        return validateUUID(dog.id);
+                    default:
+                        return false;
+                };
+            });
+            return {
+                ...state,
+                filteredDogs: filteredByOrigin,
+                filterByOrigin: action.payload,
+            };
+
         case actions.FILTER_BY_NAME:
             const filteredByName = state.allDogs.filter(dog => dog.name.toLowerCase().includes(action.payload.toLowerCase()));
             return {
@@ -48,7 +86,7 @@ function reducer(state = initialState, action) {
                 filterByName: action.payload,
             };
         case actions.ORDER_BY_NAME:
-            const orderedByName = state.filteredDogs.sort((a, b) => {
+            const orderedByName = [...state.filteredDogs].sort((a, b) => {
                 if (a.name > b.name) return action.payload === 'asc' ? 1 : -1;
                 if (a.name < b.name) return action.payload === 'asc' ? -1 : 1;
                 return 0;
@@ -59,7 +97,7 @@ function reducer(state = initialState, action) {
                 orderBy: action.payload,
             };
         case actions.ORDER_BY_WEIGHT:
-            const orderedByWeight = state.filteredDogs.sort((a, b) => {
+            const orderedByWeight = [...state.filteredDogs].sort((a, b) => {
                 if (a.weight > b.weight) return action.payload === 'asc' ? 1 : -1;
                 if (a.weight < b.weight) return action.payload === 'asc' ? -1 : 1;
                 return 0;
@@ -70,7 +108,7 @@ function reducer(state = initialState, action) {
                 orderBy: action.payload,
             };
         case actions.ORDER_BY_HEIGHT:
-            const orderedByHeight = state.filteredDogs.sort((a, b) => {
+            const orderedByHeight = [...state.filteredDogs].sort((a, b) => {
                 if (a.height > b.height) return action.payload === 'asc' ? 1 : -1;
                 if (a.height < b.height) return action.payload === 'asc' ? -1 : 1;
                 return 0;
@@ -81,7 +119,7 @@ function reducer(state = initialState, action) {
                 orderBy: action.payload,
             };
         case actions.ORDER_BY_LIFE_SPAN:
-            const orderedByLifeSpan = state.filteredDogs.sort((a, b) => {
+            const orderedByLifeSpan = [...state.filteredDogs].sort((a, b) => {
                 if (a.life_span > b.life_span) return action.payload === 'asc' ? 1 : -1;
                 if (a.life_span < b.life_span) return action.payload === 'asc' ? -1 : 1;
                 return 0;
@@ -90,6 +128,11 @@ function reducer(state = initialState, action) {
                 ...state,
                 filteredDogs: orderedByLifeSpan,
                 orderBy: action.payload,
+            };
+        case actions.ORDER_BY_DEFAULT:
+            return {
+                ...state,
+                orderBy: 'default',
             };
         case actions.CLEAR_FILTERS:
             return {
@@ -150,6 +193,31 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 currentPage: state.currentPage + 1,
+            };
+        case actions.FIRST_PAGE:
+            return {
+                ...state,
+                currentPage: 1,
+            };
+        case actions.LAST_PAGE:
+            return {
+                ...state,
+                currentPage: Math.ceil(state.filteredDogs.length / state.dogsPerPage),
+            };
+        case actions.SET_DOGS_PER_PAGE:
+            return {
+                ...state,
+                dogsPerPage: action.payload,
+            };
+        case actions.SET_TOTAL_PAGES:
+            return {
+                ...state,
+                totalPages: Math.ceil(state.filteredDogs.length / state.dogsPerPage),
+            };
+        case actions.SEARCH_BY_NAME:
+            return {
+                ...state,
+                dogDetail: action.payload,
             };
         default:
             return state;

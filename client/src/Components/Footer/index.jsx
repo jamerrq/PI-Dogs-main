@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 
 // Icons
-import { FaReact, FaHtml5, FaCss3, FaGithub, } from 'react-icons/fa';
+import { FaReact, FaHtml5, FaCss3, } from 'react-icons/fa';
 import { SiRedux, SiJavascript, SiExpress, SiSequelize } from 'react-icons/si';
 import { SiPostgresql } from 'react-icons/si';
 
@@ -11,7 +11,7 @@ class Footer extends React.Component {
     render() {
         return (
             <footer>
-                Web Desktop App created by&nbsp;
+                Web Api created by&nbsp;
                 <a href="https://github.com/jamerrq">
                     @jamerrq
                 </a>&nbsp;using&nbsp;
@@ -21,7 +21,7 @@ class Footer extends React.Component {
                 <SiRedux />&nbsp;
                 <SiJavascript />&nbsp;
                 <SiExpress />&nbsp;
-                <FaGithub />&nbsp;
+                {/* <FaGithub />&nbsp; */}
                 <SiSequelize />&nbsp;
                 <SiPostgresql />&nbsp;
             </footer>

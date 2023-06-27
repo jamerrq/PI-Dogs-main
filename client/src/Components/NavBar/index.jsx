@@ -16,28 +16,70 @@ import { connect } from 'react-redux';
 
 class NavBar extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.ownSearchHandler = this.ownSearchHandler.bind(this);
+        this.ownFilterHandler = this.ownFilterHandler.bind(this);
+    };
+
+    ownSearchHandler = () => {
+        // sent the name attribute of the input to the handler
+        let searchInput = document.getElementById('search-input');
+        this.props.searchHandler(searchInput.value);
+        searchInput.value = '';
+    };
+
+    ownFilterHandler = (e) => {
+        let type = e.target.name;
+        let value = e.target.value;
+        this.props.filterHandler(type, value);
+    };
+
+    ownSortHandler = () => {
+        let type = document.getElementById('sorter').value;
+        let order = document.getElementById('order').value;
+        this.props.sortHandler(type, order);
+    };
+
     render() {
         return (
             <div className='navbar'>
                 <div className="search-side">
-                    <input type="text" id="search-input" />
-                    <button id="search-button"><TbSearch /></button>
+                    <input
+                        type="text" id="search-input"
+                        onChange={this.props.handleSearch}
+                    />
+                    <button
+                        id="search-button"
+                        onClick={this.ownSearchHandler}>
+                        <TbSearch />
+                    </button>
                 </div>
                 <div className="filters">
                     <div className="filter-div">
                         <label htmlFor="temp-filter">Temperament</label>
-                        <select name="temp-filter" id="temp-filter">
+                        <select
+                            name="temperament"
+                            id="temp-filter"
+                            onChange={this.ownFilterHandler}
+                        >
                             <option value="all">All</option>
-                            {this.props.temperaments.map((temp, index) => {
+                            {this.props.temperaments.sort().map((temp, index) => {
                                 return (
-                                    <option key={index} value={temp}>{temp}</option>
+                                    <option key={index} value={temp}>
+                                        {temp}
+                                    </option>
                                 );
                             })}
                         </select>
                     </div>
                     <div className="filter-div">
                         <label htmlFor="origin-filter">Origin</label>
-                        <select name="origin-filter" id="origin-filter">
+                        <select
+                            name="origin"
+                            id="origin-filter"
+                            onChange={this.ownFilterHandler}
+                        >
                             <option value="all">All</option>
                             <option value="api">Api</option>
                             <option value="created">Created</option>
@@ -50,12 +92,22 @@ class NavBar extends React.Component {
                             <label htmlFor="sorter">Sort by</label>
                         </div>
                         <div id="sorter-options-div">
-                            <select name="sorter" id="sorter">
+                            <select
+                                name="sorter"
+                                id="sorter"
+                                onChange={this.ownSortHandler}
+                            >
                                 <option value="name">Name</option>
                                 <option value="weight">Weight</option>
+                                <option value="height">Height</option>
+                                <option value="life_span">Life Span</option>
                                 <option value="default">Default</option>
                             </select>
-                            <select name="order" id="order">
+                            <select
+                                name="order"
+                                id="order"
+                                onChange={this.ownSortHandler}
+                            >
                                 <option value="asc">Asc</option>
                                 <option value="desc">Desc</option>
                             </select>
@@ -64,10 +116,14 @@ class NavBar extends React.Component {
                 </div>
                 <div className='right-side'>
                     <NavLink to="/create">
-                        <button id="create-button">CREAR <BiAddToQueue /></button>
+                        <button id="create-button">
+                            CREAR <BiAddToQueue />
+                        </button>
                     </NavLink>
                     <NavLink to="/">
-                        <button id="logout-button">SALIR <FaDoorOpen /></button>
+                        <button id="logout-button">
+                            SALIR <FaDoorOpen />
+                        </button>
                     </NavLink>
                 </div>
             </div>
@@ -79,7 +135,12 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        temperaments: state.temperaments
+        temperaments: state.temperaments,
+        allDogs: state.allDogs,
+        filteredDogs: state.filteredDogs,
+        orderBy: state.orderBy,
+        filterByTemperament: state.filterByTemperament,
+        filterByName: state.filterByName,
     };
 };
 

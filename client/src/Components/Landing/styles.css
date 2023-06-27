@@ -43,9 +43,16 @@ html {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    position: relative;
+    top: 60px;
+    left: 320px;
+}
+
+.landing button:hover {
+    background-color: #7E1717;
 }

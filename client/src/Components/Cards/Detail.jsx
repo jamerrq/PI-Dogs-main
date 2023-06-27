@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 // Navlink to go back to the home page
 import { NavLink } from 'react-router-dom';
 
+// Icons
+import { BiArrowBack } from 'react-icons/bi';
+
 
 class Detail extends React.Component {
 
@@ -13,7 +16,9 @@ class Detail extends React.Component {
         super(props);
         this.id = this.props.match.params.id;
         this.state = {
-            card: this.props.allDogs?.find(dog => String(dog.id) === this.id || String(dog.idApi) === this.id) || {},
+            card: this.props.card ||
+                this.props.allDogs?.find(dog => String(dog.id) === this.id ||
+                    String(dog.idApi) === this.id) || {},
         };
     };
 
@@ -25,10 +30,13 @@ class Detail extends React.Component {
         return (
             <div id="detail-container">
 
-                <h3>ID: {this.id}</h3>
+                <h3>
+                    ID: {this.id || this.state.card.idApi || this.state.card.id}
+                </h3>
 
 
-                <img src={this.state.card.image || ""} alt={this.state.card.name || ""} />
+                <img src={this.state.card.image || ""}
+                    alt={this.state.card.name || ""} />
 
                 <h1>Name: {this.state.card.name}</h1>
 
@@ -42,7 +50,9 @@ class Detail extends React.Component {
 
                 <div id="button-div">
                     <NavLink to='/home'>
-                        <button id="back-btn">GO BACK</button>
+                        <button id="back-btn">
+                            <BiArrowBack />
+                        </button>
                     </NavLink>
                 </div>
             </div>
