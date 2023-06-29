@@ -3,7 +3,7 @@ import * as actions from './action-types';
 
 
 export const loadDogs = () => async (dispatch) => {
-    const dogs = await axios.get('http://localhost:3001/dogs');
+    const dogs = await axios.get('/dogs');
     return dispatch({
         type: actions.LOAD_DOGS,
         payload: dogs.data,
@@ -11,7 +11,7 @@ export const loadDogs = () => async (dispatch) => {
 };
 
 export const loadTemperaments = () => async (dispatch) => {
-    const temperaments = await axios.get('http://localhost:3001/temperaments');
+    const temperaments = await axios.get('/temperaments');
     return dispatch({
         type: actions.LOAD_TEMPERAMENTS,
         payload: temperaments.data,
@@ -19,7 +19,7 @@ export const loadTemperaments = () => async (dispatch) => {
 };
 
 export const loadDogDetail = (id) => async (dispatch) => {
-    const dog = await axios.get(`http://localhost:3001/dogs/${id}`);
+    const dog = await axios.get(`/dogs/${id}`);
     return dispatch({
         type: actions.LOAD_DOG_DETAIL,
         payload: dog.data,
@@ -91,7 +91,7 @@ export const orderBy = (order) => (dispatch) => {
 };
 
 export const createDog = (dog) => async (dispatch) => {
-    const response = await axios.post('http://localhost:3001/dogs', dog);
+    const response = await axios.post('/dogs', dog);
     // console.log('CREATE DOG RESPONSE', response);
     return dispatch({
         type: actions.CREATE_DOG,
@@ -100,7 +100,7 @@ export const createDog = (dog) => async (dispatch) => {
 };
 
 export const modifyDog = (id, dog) => async (dispatch) => {
-    const response = await axios.put(`http://localhost:3001/dogs/${id}`, dog);
+    const response = await axios.put(`/dogs/${id}`, dog);
     return dispatch({
         type: actions.MODIFY_DOG,
         payload: response.data,
@@ -108,7 +108,7 @@ export const modifyDog = (id, dog) => async (dispatch) => {
 };
 
 export const deleteDog = (id) => async (dispatch) => {
-    const response = await axios.delete(`http://localhost:3001/dogs/${id}`);
+    const response = await axios.delete(`/dogs/${id}`);
     return dispatch({
         type: actions.DELETE_DOG,
         payload: response.data,
@@ -160,7 +160,7 @@ export const setTotalPages = (totalPages) => (dispatch) => {
 };
 
 export const searchByName = (name) => async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+    const response = await axios.get(`/dogs?name=${name}`);
     // console.log('SEARCH BY NAME RESPONSE', response);
     const dogs = response.data || [];
     if (dogs.length === 0) {
