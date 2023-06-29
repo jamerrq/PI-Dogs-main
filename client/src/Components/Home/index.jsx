@@ -43,28 +43,28 @@ class Home extends React.Component {
 
     };
 
-    updateState = (updatePages = false) => {
+    updateState = async (updatePages = false) => {
+        if (updatePages) {
+            let newTotalPages = Math.ceil(this.props.filteredDogs / 8);
+            this.setState({
+                totalPages: newTotalPages,
+            });
+            await this.props.setTotalPages(newTotalPages);
+        };
         this.setState({
             aux: this.state.aux + 1,
             cards: this.props.filteredDogs,
             currentPage: this.props.currentPage,
             totalPages: this.props.totalPages,
         });
-        if (updatePages) {
-            this.setState({
-                totalPages: Math.ceil(this.props.filteredDogs.length / 8),
-            });
-        };
     };
 
     // Handler for the search bar
     changeHandler = async (e) => {
 
         await this.props.filterByName(e.target.value);
+        await this.updateState(true);
         await this.props.firstPage();
-        let newTotalPages = Math.ceil(this.props.filteredDogs.length / 8);
-        await this.props.setTotalPages(newTotalPages);
-        this.updateState();
 
     };
 
@@ -81,7 +81,7 @@ class Home extends React.Component {
             await this.props.clearDogDetail();
             await this.props.loadDogs();
             await this.props.firstPage();
-            this.updateState();
+            await this.updateState(true);
             return 1;
         }
         if (this.props.dogDetail.id) {
@@ -93,10 +93,10 @@ class Home extends React.Component {
         };
 
         // change state
-        this.updateState();
-        this.props.clearDogDetail();
-        this.props.loadDogs();
-        this.props.firstPage();
+        await this.updateState();
+        await this.props.clearDogDetail();
+        await this.props.loadDogs();
+        await this.props.firstPage();
 
     };
 
@@ -120,7 +120,7 @@ class Home extends React.Component {
                 this.setState({
                     tempFilterTrigger: true,
                 });
-                this.updateState(true);
+                await this.updateState(true);
                 break;
             case 'origin':
                 if (this.state.originFilterTrigger) {
@@ -136,7 +136,7 @@ class Home extends React.Component {
                     });
                 };
                 await this.props.filterByOrigin(value);
-                this.updateState(true);
+                await this.updateState(true);
                 this.setState({
                     originFilterTrigger: true,
                 });
@@ -151,14 +151,14 @@ class Home extends React.Component {
         console.log('type:', type, 'value:', value);
         let order = [type, value].join(',');
         await this.props.orderBy(order);
-        this.updateState(true);
+        await this.updateState(true);
     };
 
     // Delete card handler
     deleteHandler = async (id) => {
         await this.props.deleteDog(id);
         await this.props.loadDogs();
-        this.updateState(true);
+        await this.updateState(true);
     };
 
 

@@ -15,7 +15,10 @@ import {
 // Cards Component
 import Card from '../Cards/Card';
 
-// const IPP = 8; // Items per Page
+// Icons
+import { BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi';
+import { BiArrowToBottom, BiArrowToTop } from 'react-icons/bi';
+
 class Pags extends React.Component {
 
     render() {
@@ -42,7 +45,7 @@ class Pags extends React.Component {
                         onClick={() => this.props.firstPage()}
                         aria-label='first-button'
                     >
-                        ⇑
+                        <BiArrowToTop />
                     </button>
                     <button
                         id="prev-button"
@@ -50,7 +53,7 @@ class Pags extends React.Component {
                         onClick={() => this.props.prevPage()}
                         aria-label='prev-button'
                     >
-                        ↑
+                        <BiUpArrowAlt />
                     </button>
                     <span id="page-indicator">{this.props.currentPage}</span>
                     <button
@@ -60,7 +63,7 @@ class Pags extends React.Component {
                         onClick={() => this.props.nextPage()}
                         aria-label='next-button'
                     >
-                        ↓
+                        <BiDownArrowAlt />
                     </button>
                     <button
                         id="last-button"
@@ -69,7 +72,7 @@ class Pags extends React.Component {
                         onClick={() => this.props.lastPage()}
                         arial-label='last-button'
                     >
-                        ⇓
+                        <BiArrowToBottom />
                     </button>
                 </div>
             </div>
