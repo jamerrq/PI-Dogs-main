@@ -76,3 +76,14 @@
     width: 100%;
     height: 100%;
 }
+
+#page-indicator {
+    background-color: #282c34;
+    color: white;
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    font-weight: bold;
+}

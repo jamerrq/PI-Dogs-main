@@ -22,11 +22,8 @@ class Detail extends React.Component {
         };
     };
 
-    componentDidMount() {
-        // console.log(this.id);
-    };
-
     render() {
+
         return (
             <div id="detail-container">
 
@@ -35,28 +32,34 @@ class Detail extends React.Component {
                 </h3>
 
 
-                <img src={this.state.card.image || ""}
-                    alt={this.state.card.name || ""} />
+                <img src={this.state.card.image || "No image found"}
+                    alt={this.state.card.name || "No image found"} />
 
-                <h1>Name: {this.state.card.name}</h1>
+                <h1>Name: {this.state.card.name || "No name found"}</h1>
 
-                <h3>Height: {this.state.card.height}</h3>
+                <h3>Height: {this.state.card.height
+                    || "No height data found"}</h3>
 
-                <h3>Weight: {this.state.card.weight}</h3>
+                <h3>Weight: {this.state.card.weight
+                    || "No weight data found"}</h3>
 
-                <h3>Temperaments: {this.state.card.temperament}</h3>
+                <h3>Temperaments: {this.state.card.temperament
+                    || "No temperament data"}</h3>
 
-                <h4>Life Span: {this.state.card.life_span}</h4>
+                <h4>Life Span: {this.state.card.life_span
+                    || "No life span data found"}</h4>
 
                 <div id="button-div">
                     <NavLink to='/home'>
-                        <button id="back-btn">
+                        <button id="back-btn" aria-label='back-btn'>
                             <BiArrowBack />
                         </button>
                     </NavLink>
                 </div>
+
             </div>
         );
+
     };
 
 };

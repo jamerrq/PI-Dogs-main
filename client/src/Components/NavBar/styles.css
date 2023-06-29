@@ -42,8 +42,11 @@
     font-size: 15px;
     font-family: 'Fira Sans', sans-serif;
     cursor: pointer;
-    justify-self: center;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
 }
 
 
@@ -54,11 +57,10 @@
 
 #logout-button,
 #create-button {
-    background-color: #7E1717;
-    color: white;
+    background-color: #FFE569;
+    color: black;
     width: 100%;
     justify-self: flex-end;
-    color: white;
     font-weight: bold;
 }
 

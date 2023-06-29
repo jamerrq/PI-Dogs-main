@@ -130,114 +130,122 @@ class Form extends React.Component {
         return (
             <div id="form-container">
                 <form onSubmit={this.handleSubmit}>
-                    <div id="input-div">
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.handleChange}
-                        />
-                        {
-                            this.state.errors.name && (
-                                <span className='errors-span'>
-                                    {this.state.errors.name}
-                                </span>)
-                        }
-                    </div>
-                    <div id="input-div">
-                        <label htmlFor="height">Height</label>
-                        <input
+                    <div id="form-fields">
+                        <div id="left-side">
+                            <div id="input-div">
+                                <label htmlFor="name">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleChange}
+                                />
+                                {
+                                    this.state.errors.name && (
+                                        <span className='errors-span'>
+                                            {this.state.errors.name}
+                                        </span>)
+                                }
+                            </div>
+                            <div id="input-div">
+                                <label htmlFor="height">Height</label>
+                                <input
 
-                            type="text"
-                            name="height"
-                            value={this.state.height}
-                            onChange={this.handleChange}
-                        />
-                        {
-                            this.state.errors.height && (
-                                <span className='errors-span'>
-                                    {this.state.errors.height}
-                                </span>)
-                        }
-                    </div>
-                    <div id="input-div">
-                        <label htmlFor="weight">Weight</label>
-                        <input
-                            type="text"
-                            name="weight"
-                            value={this.state.weight}
-                            onChange={this.handleChange}
-                        />
-                        {
-                            this.state.errors.weight && (
-                                <span className='errors-span'>
-                                    {this.state.errors.weight}
-                                </span>)
-                        }
-                    </div>
-                    <div id="input-div">
-                        <label htmlFor="life_span">Life Span</label>
-                        <input
-                            type="text"
-                            name="life_span"
-                            value={this.state.life_span}
-                            onChange={this.handleChange}
-                        />
-                        {
-                            this.state.errors.life_span && (
-                                <span className='errors-span'>
-                                    {this.state.errors.life_span}
-                                </span>)
-                        }
-                    </div>
-                    <div id="input-div">
-                        <label htmlFor="temperaments">Temperaments</label>
-                        {/** Checkboxes */}
-                        <div id="temperaments-container">
+                                    type="text"
+                                    name="height"
+                                    value={this.state.height}
+                                    onChange={this.handleChange}
+                                />
+                                {
+                                    this.state.errors.height && (
+                                        <span className='errors-span'>
+                                            {this.state.errors.height}
+                                        </span>)
+                                }
+                            </div>
+                            <div id="input-div">
+                                <label htmlFor="weight">Weight</label>
+                                <input
+                                    type="text"
+                                    name="weight"
+                                    value={this.state.weight}
+                                    onChange={this.handleChange}
+                                />
+                                {
+                                    this.state.errors.weight && (
+                                        <span className='errors-span'>
+                                            {this.state.errors.weight}
+                                        </span>)
+                                }
+                            </div>
+                            <div id="input-div">
+                                <label htmlFor="life_span">Life Span</label>
+                                <input
+                                    type="text"
+                                    name="life_span"
+                                    value={this.state.life_span}
+                                    onChange={this.handleChange}
+                                />
+                                {
+                                    this.state.errors.life_span && (
+                                        <span className='errors-span'>
+                                            {this.state.errors.life_span}
+                                        </span>)
+                                }
+                            </div>
+                            <div id="input-div">
+                                <label htmlFor="image">Image</label>
+                                <input
+                                    type="text"
+                                    name="image"
+                                    value={this.state.image}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
                             {
-                                this.props.temperaments.map(
-                                    (temperament, index) => {
-                                        return (
-                                            <div key={index}
-                                                className="checkbox-container">
-                                                <input
-                                                    type="checkbox"
-                                                    name="temperaments"
-                                                    value={temperament}
-                                                    onChange={this.handleSelect}
-                                                />
-                                                <label htmlFor="temperaments">
-                                                    {temperament}</label>
-                                            </div>
-                                        );
-                                    })
+                                this.state.errors.image && (
+                                    <span className='errors-span'>
+                                        {this.state.errors.image}
+                                    </span>)
                             }
                         </div>
-                        {
-                            this.state.errors.temperaments && (
-                                <span className='errors-span'>
-                                    {this.state.errors.temperaments}
-                                </span>)
-                        }
+                        <div id="right-side">
+                            <div id="input-div">
+                                <label htmlFor="temperaments">Temperaments</label>
+                                {/** Checkboxes */}
+                                <div id="temperaments-container">
+                                    {
+                                        this.props.temperaments.map(
+                                            (temperament, index) => {
+                                                return (
+                                                    <div key={index}
+                                                        className="checkbox-container">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="temperaments"
+                                                            value={temperament}
+                                                            onChange={this.handleSelect}
+                                                        />
+                                                        <label htmlFor="temperaments">
+                                                            {temperament}</label>
+                                                    </div>
+                                                );
+                                            })
+                                    }
+                                </div>
+                                {
+                                    this.state.errors.temperaments && (
+                                        <span className='errors-span'>
+                                            {this.state.errors.temperaments}
+                                        </span>)
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div id="input-div">
-                        <label htmlFor="image">Image</label>
-                        <input
-                            type="text"
-                            name="image"
-                            value={this.state.image}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    {
-                        this.state.errors.image && (
-                            <span className='errors-span'>
-                                {this.state.errors.image}
-                            </span>)
-                    }
-                    <div id="input-div">
-                        <button type="submit">Create Dog</button>
+                    <div id="form-buttons">
+                        <div id="input-div">
+                            <button type="submit">Create Dog</button>
+                        </div>
                     </div>
                 </form>
                 <div className="back-btn">

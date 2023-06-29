@@ -154,10 +154,13 @@ class Home extends React.Component {
         this.updateState(true);
     };
 
-    goFirstPage = async () => {
-        await this.props.firstPage();
-        this.updateState();
+    // Delete card handler
+    deleteHandler = async (id) => {
+        await this.props.deleteDog(id);
+        await this.props.loadDogs();
+        this.updateState(true);
     };
+
 
     render() {
 
@@ -173,6 +176,7 @@ class Home extends React.Component {
                     cards={this.state.cards}
                     currentPage={this.state.currentPage}
                     totalPages={this.state.totalPages}
+                    updateState={this.updateState}
                 ></Pags>
                 <Footer />
             </div>

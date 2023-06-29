@@ -18,23 +18,19 @@ import Card from '../Cards/Card';
 // const IPP = 8; // Items per Page
 class Pags extends React.Component {
 
-    handlePrevPageEvent() {
-        this.props.prevPage();
-    };
-
-    handleNextPageEvent() {
-        this.props.nextPage();
-    };
-
     render() {
         return (
             <div className='pags'>
 
                 <div id="cards-container">
                     <div className='cards'>
-                        {this.props.cards?.slice(this.props.currentPage * 8 - 8, this.props.currentPage * 8)
+                        {this.props.cards?.slice(this.props.currentPage * 8 - 8,
+                            this.props.currentPage * 8)
                             .map((card) => (
-                                <Card card={card} key={card.id} />
+                                <Card
+                                    card={card}
+                                    key={card.id}
+                                    updateState={this.props.updateState} />
                             ))}
                     </div>
                 </div>
@@ -44,13 +40,15 @@ class Pags extends React.Component {
                         id="first-button"
                         disabled={this.props.currentPage === 1}
                         onClick={() => this.props.firstPage()}
+                        aria-label='first-button'
                     >
                         ⇑
                     </button>
                     <button
                         id="prev-button"
                         disabled={this.props.currentPage === 1}
-                        onClick={() => this.handlePrevPageEvent()}
+                        onClick={() => this.props.prevPage()}
+                        aria-label='prev-button'
                     >
                         ↑
                     </button>
@@ -59,7 +57,8 @@ class Pags extends React.Component {
                         id="next-button"
                         disabled={this.props.currentPage ===
                             this.props.totalPages}
-                        onClick={() => this.handleNextPageEvent()}
+                        onClick={() => this.props.nextPage()}
+                        aria-label='next-button'
                     >
                         ↓
                     </button>
@@ -68,6 +67,7 @@ class Pags extends React.Component {
                         disabled={this.props.currentPage ===
                             this.props.totalPages}
                         onClick={() => this.props.lastPage()}
+                        arial-label='last-button'
                     >
                         ⇓
                     </button>

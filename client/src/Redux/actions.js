@@ -100,7 +100,7 @@ export const createDog = (dog) => async (dispatch) => {
 };
 
 export const modifyDog = (id, dog) => async (dispatch) => {
-    const response = await axios.put(`http://localhost:3001/dog/${id}`, dog);
+    const response = await axios.put(`http://localhost:3001/dogs/${id}`, dog);
     return dispatch({
         type: actions.MODIFY_DOG,
         payload: response.data,
@@ -108,7 +108,7 @@ export const modifyDog = (id, dog) => async (dispatch) => {
 };
 
 export const deleteDog = (id) => async (dispatch) => {
-    const response = await axios.delete(`http://localhost:3001/dog/${id}`);
+    const response = await axios.delete(`http://localhost:3001/dogs/${id}`);
     return dispatch({
         type: actions.DELETE_DOG,
         payload: response.data,

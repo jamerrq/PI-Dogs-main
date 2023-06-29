@@ -52,7 +52,9 @@ class NavBar extends React.Component {
                     />
                     <button
                         id="search-button"
-                        onClick={this.ownSearchHandler}>
+                        onClick={this.ownSearchHandler}
+                        aria-label='search-button'
+                    >
                         <TbSearch />
                     </button>
                 </div>
@@ -126,7 +128,10 @@ class NavBar extends React.Component {
                         </button>
                     </NavLink>
                     <NavLink to="/">
-                        <button id="logout-button">
+                        <button
+                            id="logout-button"
+                            aria-label='logout-button'
+                        >
                             SALIR <FaDoorOpen />
                         </button>
                     </NavLink>
