@@ -104,3 +104,9 @@ p[class=temperaments] {
 #detail-container img:hover {
     border: 3px solid #7E1717;
 }
+
+hr {
+    width: 100%;
+    border: 1px solid brown;
+    margin: 2px 2px;
+}

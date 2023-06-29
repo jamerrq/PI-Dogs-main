@@ -27,17 +27,21 @@ const validateInput = (input) => {
 };
 
 
+let imgUrl =
+    'https://m.media-amazon.com/images/I/61JNFVu5U+L._AC_UF1000,1000_QL80_.jpg';
+
+
 class Form extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: 'HENRY DOG',
-            height: '4 - 20',
-            weight: '3 - 23',
-            life_span: '6 - 21 years',
+            name: 'HENRY (DB DOG)',
+            height: '100 - 200',
+            weight: '1 - 2',
+            life_span: '1 - 2 years',
             temperaments: [],
-            image: 'https://m.media-amazon.com/images/I/61JNFVu5U+L._AC_UF1000,1000_QL80_.jpg',
+            image: imgUrl,
             errors: {
                 name: 'NAME IS REQUIRED',
                 height: 'HEIGHT IS REQUIRED',
@@ -73,7 +77,8 @@ class Form extends React.Component {
             temperaments.push(e.target.value);
         };
         if (!e.target.checked) {
-            temperaments = temperaments.filter(temperament => temperament !== e.target.value);
+            temperaments = temperaments.filter(
+                temperament => temperament !== e.target.value);
         };
         this.setState({
             ...this.state,
@@ -133,7 +138,12 @@ class Form extends React.Component {
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
-                        <span className='errors-span'>{this.state.errors.name}</span>
+                        {
+                            this.state.errors.name && (
+                                <span className='errors-span'>
+                                    {this.state.errors.name}
+                                </span>)
+                        }
                     </div>
                     <div id="input-div">
                         <label htmlFor="height">Height</label>
@@ -144,7 +154,12 @@ class Form extends React.Component {
                             value={this.state.height}
                             onChange={this.handleChange}
                         />
-                        <span className='errors-span'>{this.state.errors.height}</span>
+                        {
+                            this.state.errors.height && (
+                                <span className='errors-span'>
+                                    {this.state.errors.height}
+                                </span>)
+                        }
                     </div>
                     <div id="input-div">
                         <label htmlFor="weight">Weight</label>
@@ -154,7 +169,12 @@ class Form extends React.Component {
                             value={this.state.weight}
                             onChange={this.handleChange}
                         />
-                        <span className='errors-span'>{this.state.errors.weight}</span>
+                        {
+                            this.state.errors.weight && (
+                                <span className='errors-span'>
+                                    {this.state.errors.weight}
+                                </span>)
+                        }
                     </div>
                     <div id="input-div">
                         <label htmlFor="life_span">Life Span</label>
@@ -164,29 +184,42 @@ class Form extends React.Component {
                             value={this.state.life_span}
                             onChange={this.handleChange}
                         />
-                        <span className='errors-span'>{this.state.errors.life_span}</span>
+                        {
+                            this.state.errors.life_span && (
+                                <span className='errors-span'>
+                                    {this.state.errors.life_span}
+                                </span>)
+                        }
                     </div>
                     <div id="input-div">
                         <label htmlFor="temperaments">Temperaments</label>
                         {/** Checkboxes */}
                         <div id="temperaments-container">
                             {
-                                this.props.temperaments.map((temperament, index) => {
-                                    return (
-                                        <div key={index} className="checkbox-container">
-                                            <input
-                                                type="checkbox"
-                                                name="temperaments"
-                                                value={temperament}
-                                                onChange={this.handleSelect}
-                                            />
-                                            <label htmlFor="temperaments">{temperament}</label>
-                                        </div>
-                                    );
-                                })
+                                this.props.temperaments.map(
+                                    (temperament, index) => {
+                                        return (
+                                            <div key={index}
+                                                className="checkbox-container">
+                                                <input
+                                                    type="checkbox"
+                                                    name="temperaments"
+                                                    value={temperament}
+                                                    onChange={this.handleSelect}
+                                                />
+                                                <label htmlFor="temperaments">
+                                                    {temperament}</label>
+                                            </div>
+                                        );
+                                    })
                             }
                         </div>
-                        <span className='errors-span'>{this.state.errors.temperaments}</span>
+                        {
+                            this.state.errors.temperaments && (
+                                <span className='errors-span'>
+                                    {this.state.errors.temperaments}
+                                </span>)
+                        }
                     </div>
                     <div id="input-div">
                         <label htmlFor="image">Image</label>
@@ -197,9 +230,12 @@ class Form extends React.Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <span className='errors-span'>
-                        {this.state.errors.image}
-                    </span>
+                    {
+                        this.state.errors.image && (
+                            <span className='errors-span'>
+                                {this.state.errors.image}
+                            </span>)
+                    }
                     <div id="input-div">
                         <button type="submit">Create Dog</button>
                     </div>

@@ -20,6 +20,7 @@ class NavBar extends React.Component {
         super(props);
         this.ownSearchHandler = this.ownSearchHandler.bind(this);
         this.ownFilterHandler = this.ownFilterHandler.bind(this);
+        this.ownSortHandler = this.ownSortHandler.bind(this);
     };
 
     ownSearchHandler = () => {
@@ -62,6 +63,7 @@ class NavBar extends React.Component {
                             name="temperament"
                             id="temp-filter"
                             onChange={this.ownFilterHandler}
+                            value={this.props.filterByTemperament}
                         >
                             <option value="all">All</option>
                             {this.props.temperaments.sort().map((temp, index) => {
@@ -79,6 +81,7 @@ class NavBar extends React.Component {
                             name="origin"
                             id="origin-filter"
                             onChange={this.ownFilterHandler}
+                            value={this.props.filterByOrigin}
                         >
                             <option value="all">All</option>
                             <option value="api">Api</option>
@@ -96,17 +99,19 @@ class NavBar extends React.Component {
                                 name="sorter"
                                 id="sorter"
                                 onChange={this.ownSortHandler}
+                                value={this.props.orderBy.split(',')[0]}
                             >
                                 <option value="name">Name</option>
                                 <option value="weight">Weight</option>
                                 <option value="height">Height</option>
                                 <option value="life_span">Life Span</option>
-                                <option value="default">Default</option>
+                                {/* <option value="default">Default</option> */}
                             </select>
                             <select
                                 name="order"
                                 id="order"
                                 onChange={this.ownSortHandler}
+                                value={this.props.orderBy.split(',')[1]}
                             >
                                 <option value="asc">Asc</option>
                                 <option value="desc">Desc</option>
@@ -141,6 +146,7 @@ const mapStateToProps = (state) => {
         orderBy: state.orderBy,
         filterByTemperament: state.filterByTemperament,
         filterByName: state.filterByName,
+        filterByOrigin: state.filterByOrigin,
     };
 };
 

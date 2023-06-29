@@ -34,6 +34,7 @@ class Card extends React.Component {
                 </div>
                 <div className="card-info-div">
                     <h3>{this.state.card.name}</h3>
+                    <hr />
                     <p className='temperaments'>
                         {this.state.card.temperament}
                     </p>

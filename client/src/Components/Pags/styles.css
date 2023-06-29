@@ -16,7 +16,7 @@
     width: 30px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 5px;
     margin: 5px;
     font-size: 15px;
@@ -27,6 +27,28 @@
 
 #prev-button:hover,
 #next-button:hover {
+    background-color: #282c34;
+    color: white;
+}
+
+#first-button,
+#last-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 5px;
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+    justify-self: center;
+    font-weight: bold;
+
+}
+
+#first-button:hover,
+#last-button:hover {
     background-color: #282c34;
     color: white;
 }

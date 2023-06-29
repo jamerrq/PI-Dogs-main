@@ -148,9 +148,14 @@ class Home extends React.Component {
 
     // Handler for sorters
     sortHandler = async (type, value) => {
+        console.log('type:', type, 'value:', value);
         let order = [type, value].join(',');
-        // console.log('ORDER:', order);
         await this.props.orderBy(order);
+        this.updateState(true);
+    };
+
+    goFirstPage = async () => {
+        await this.props.firstPage();
         this.updateState();
     };
 
@@ -191,6 +196,7 @@ const mapStateToProps = (state) => {
         dogDetail: state.dogDetail,
     };
 };
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

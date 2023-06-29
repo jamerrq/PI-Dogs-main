@@ -49,8 +49,9 @@ export const filterByName = (name) => (dispatch) => {
 
 export const orderBy = (order) => (dispatch) => {
 
-    console.log('ORDER BY', order);
+    // console.log('ORDER BY', order);
 
+    // eslint-disable-next-line no-unused-vars
     let [criteria, direction] = order.split(',');
     // console.log('CRITERIA', criteria);
     // console.log('DIRECTION', direction);
@@ -58,32 +59,32 @@ export const orderBy = (order) => (dispatch) => {
         case 'name':
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: direction,
+                payload: order,
             });
         case 'weight':
             return dispatch({
                 type: actions.ORDER_BY_WEIGHT,
-                payload: direction,
+                payload: order,
             });
         case 'height':
             return dispatch({
                 type: actions.ORDER_BY_HEIGHT,
-                payload: direction,
+                payload: order,
             });
         case 'life_span':
             return dispatch({
                 type: actions.ORDER_BY_LIFE_SPAN,
-                payload: direction,
+                payload: order,
             });
         case 'default':
             return dispatch({
                 type: actions.ORDER_BY_DEFAULT,
-                payload: direction,
+                payload: order,
             });
         default:
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: direction,
+                payload: order,
             });
     };
 
@@ -134,13 +135,13 @@ export const prevPage = () => (dispatch) => {
 
 export const firstPage = () => (dispatch) => {
     return dispatch({
-        type: actions.FIRST_PAGE,
+        type: actions.GO_FIRST_PAGE,
     });
 };
 
 export const lastPage = () => (dispatch) => {
     return dispatch({
-        type: actions.LAST_PAGE,
+        type: actions.GO_LAST_PAGE,
     });
 };
 

@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 // Actions
 import {
     loadDogs, loadTemperaments,
-    prevPage, nextPage
+    prevPage, nextPage,
+    firstPage, lastPage,
 } from '../../Redux/actions';
 
 // Cards Component
@@ -40,6 +41,13 @@ class Pags extends React.Component {
 
                 <div id="pagination-bar">
                     <button
+                        id="first-button"
+                        disabled={this.props.currentPage === 1}
+                        onClick={() => this.props.firstPage()}
+                    >
+                        ⇑
+                    </button>
+                    <button
                         id="prev-button"
                         disabled={this.props.currentPage === 1}
                         onClick={() => this.handlePrevPageEvent()}
@@ -54,6 +62,14 @@ class Pags extends React.Component {
                         onClick={() => this.handleNextPageEvent()}
                     >
                         ↓
+                    </button>
+                    <button
+                        id="last-button"
+                        disabled={this.props.currentPage ===
+                            this.props.totalPages}
+                        onClick={() => this.props.lastPage()}
+                    >
+                        ⇓
                     </button>
                 </div>
             </div>
@@ -77,6 +93,8 @@ const mapDispatchToProps = (dispatch) => {
         loadDogs: () => dispatch(loadDogs()),
         prevPage: () => dispatch(prevPage()),
         nextPage: () => dispatch(nextPage()),
+        firstPage: () => dispatch(firstPage()),
+        lastPage: () => dispatch(lastPage()),
     };
 };
 
