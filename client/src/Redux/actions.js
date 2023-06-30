@@ -59,32 +59,27 @@ export const orderBy = (order) => (dispatch) => {
         case 'name':
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: order,
+                payload: direction,
             });
         case 'weight':
             return dispatch({
                 type: actions.ORDER_BY_WEIGHT,
-                payload: order,
+                payload: direction,
             });
         case 'height':
             return dispatch({
                 type: actions.ORDER_BY_HEIGHT,
-                payload: order,
+                payload: direction,
             });
         case 'life_span':
             return dispatch({
                 type: actions.ORDER_BY_LIFE_SPAN,
-                payload: order,
-            });
-        case 'default':
-            return dispatch({
-                type: actions.ORDER_BY_DEFAULT,
-                payload: order,
+                payload: direction,
             });
         default:
             return dispatch({
                 type: actions.ORDER_BY_NAME,
-                payload: order,
+                payload: direction,
             });
     };
 

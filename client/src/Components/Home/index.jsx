@@ -15,7 +15,7 @@ import {
     setTotalPages, searchByName,
     clearDogDetail, loadDogs,
     filterByTemperament, filterByOrigin,
-    orderBy,
+    orderBy, deleteDog
 } from '../../Redux/actions';
 
 // withRouter
@@ -40,12 +40,13 @@ class Home extends React.Component {
         this.searchHandler = this.searchHandler.bind(this);
         this.updateState = this.updateState.bind(this);
         this.filterHandler = this.filterHandler.bind(this);
+        this.deleteHandler = this.deleteHandler.bind(this);
 
     };
 
     updateState = async (updatePages = false) => {
         if (updatePages) {
-            let newTotalPages = Math.ceil(this.props.filteredDogs / 8);
+            let newTotalPages = Math.ceil(this.props.filteredDogs.length / 8);
             this.setState({
                 totalPages: newTotalPages,
             });
@@ -57,6 +58,7 @@ class Home extends React.Component {
             currentPage: this.props.currentPage,
             totalPages: this.props.totalPages,
         });
+        console.log('STATUS UPDATED!');
     };
 
     // Handler for the search bar
@@ -121,6 +123,7 @@ class Home extends React.Component {
                     tempFilterTrigger: true,
                 });
                 await this.updateState(true);
+                await this.props.firstPage();
                 break;
             case 'origin':
                 if (this.state.originFilterTrigger) {
@@ -140,6 +143,7 @@ class Home extends React.Component {
                 this.setState({
                     originFilterTrigger: true,
                 });
+                await this.props.firstPage();
                 break;
             default:
                 break;
@@ -176,7 +180,7 @@ class Home extends React.Component {
                     cards={this.state.cards}
                     currentPage={this.state.currentPage}
                     totalPages={this.state.totalPages}
-                    updateState={this.updateState}
+                    deleteHandler={this.deleteHandler}
                 ></Pags>
                 <Footer />
             </div>
@@ -214,6 +218,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(filterByTemperament(temperament)),
         filterByOrigin: (origin) => dispatch(filterByOrigin(origin)),
         orderBy: (order) => dispatch(orderBy(order)),
+        deleteDog: (id) => dispatch(deleteDog(id)),
     };
 };
 

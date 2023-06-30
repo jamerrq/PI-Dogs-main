@@ -49,6 +49,7 @@ class NavBar extends React.Component {
                     <input
                         type="text" id="search-input"
                         onChange={this.props.handleSearch}
+                        value={this.props.nameFilter}
                     />
                     <button
                         id="search-button"
@@ -65,7 +66,7 @@ class NavBar extends React.Component {
                             name="temperament"
                             id="temp-filter"
                             onChange={this.ownFilterHandler}
-                            value={this.props.filterByTemperament}
+                            value={this.props.tempFilter}
                         >
                             <option value="all">All</option>
                             {this.props.temperaments.sort().map((temp, index) => {
@@ -83,7 +84,7 @@ class NavBar extends React.Component {
                             name="origin"
                             id="origin-filter"
                             onChange={this.ownFilterHandler}
-                            value={this.props.filterByOrigin}
+                            value={this.props.originFilter}
                         >
                             <option value="all">All</option>
                             <option value="api">Api</option>
@@ -113,7 +114,7 @@ class NavBar extends React.Component {
                                 name="order"
                                 id="order"
                                 onChange={this.ownSortHandler}
-                                value={this.props.orderBy.split(',')[1]}
+                                value={this.props.orderDirection}
                             >
                                 <option value="asc">Asc</option>
                                 <option value="desc">Desc</option>
@@ -149,9 +150,10 @@ const mapStateToProps = (state) => {
         allDogs: state.allDogs,
         filteredDogs: state.filteredDogs,
         orderBy: state.orderBy,
-        filterByTemperament: state.filterByTemperament,
-        filterByName: state.filterByName,
-        filterByOrigin: state.filterByOrigin,
+        orderDirection: state.orderDirection,
+        tempFilter: state.tempFilter,
+        nameFilter: state.nameFilter,
+        originFilter: state.originFilter,
     };
 };
 

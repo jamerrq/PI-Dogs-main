@@ -26,9 +26,11 @@ class Card extends React.Component {
         this.ownDeleteDog = this.ownDeleteDog.bind(this);
     };
 
-    ownDeleteDog = (id) => {
-        this.props.deleteDog(id);
-        this.props.updateState(true);
+    ownDeleteDog = async () => {
+        let id = this.state.card.id;
+        if (id) {
+            await this.props.deleteHandler(id);
+        };
     };
 
     render() {
@@ -67,7 +69,7 @@ class Card extends React.Component {
                             className='card-btn'
                             aria-label='delete-button'
                             onClick={() =>
-                                this.ownDeleteDog(this.state.card.id)}
+                                this.ownDeleteDog()}
                         >
                             <RiDeleteBin5Line />
                         </button>

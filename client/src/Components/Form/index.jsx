@@ -36,7 +36,7 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'HENRY (DB DOG)',
+            name: '@HENRY',
             height: '100 - 200',
             weight: '1 - 2',
             life_span: '1 - 2 years',
