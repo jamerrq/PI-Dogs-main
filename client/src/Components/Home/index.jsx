@@ -49,7 +49,7 @@ class Home extends React.Component {
     async componentDidMount() {
         // console.log('Home mounted!');
         await this.props.loadDogs();
-        await this.props.firstPage();
+        // await this.props.firstPage();
         await this.updateState(true);
     };
 
