@@ -281,7 +281,8 @@ function reducer(state = initialState, action) {
         case actions.LAST_PAGE:
             return {
                 ...state,
-                currentPage: Math.ceil(state.filteredDogs.length / state.dogsPerPage),
+                currentPage: Math.ceil(state.filteredDogs.length
+                    / state.dogsPerPage),
             };
 
         case actions.SET_DOGS_PER_PAGE:
@@ -293,7 +294,8 @@ function reducer(state = initialState, action) {
         case actions.SET_TOTAL_PAGES:
             return {
                 ...state,
-                totalPages: Math.ceil(state.filteredDogs.length / state.dogsPerPage),
+                totalPages: Math.ceil(state.filteredDogs.length
+                    / state.dogsPerPage),
             };
 
         case actions.SEARCH_BY_NAME:
@@ -313,6 +315,12 @@ function reducer(state = initialState, action) {
                 ...state,
                 currentPage: Math.ceil(
                     state.filteredDogs.length / state.dogsPerPage),
+            };
+
+        case actions.SET_FILTER_NAME:
+            return {
+                ...state,
+                nameFilter: action.payload,
             };
 
         default:

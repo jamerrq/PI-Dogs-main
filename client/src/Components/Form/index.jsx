@@ -2,9 +2,12 @@ import React from 'react';
 import './styles.css';
 
 import { connect } from 'react-redux';
-import { createDog, loadDogs } from '../../Redux/actions';
+import { createDog, loadDogs, modifyDog } from '../../Redux/actions';
 
 import { NavLink } from 'react-router-dom';
+
+// History
+import { withHistory } from '../withRouter';
 
 const validateInput = (input) => {
     let errors = {};
@@ -36,12 +39,31 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '@HENRY',
-            height: '100 - 200',
-            weight: '1 - 2',
-            life_span: '1 - 2 years',
+            name: props.card?.name || '@HENRY',
+            height: props.card?.height || '100 - 200',
+            weight: props.card?.weight || '1 - 2',
+            life_span: props.card?.life_span || '1 - 2 years',
+            temperaments: props.card?.temperaments || [],
+            image: props.card?.image || imgUrl,
+        };
+        this.state.errors = validateInput(this.state);
+    };
+
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            errors: validateInput(this.state),
+        });
+    };
+
+    resetState = () => {
+        this.setState({
+            name: '',
+            height: '',
+            weight: '',
+            life_span: '',
             temperaments: [],
-            image: imgUrl,
+            image: '',
             errors: {
                 name: 'NAME IS REQUIRED',
                 height: 'HEIGHT IS REQUIRED',
@@ -50,13 +72,6 @@ class Form extends React.Component {
                 image: 'IMAGE IS REQUIRED',
                 temperaments: 'AT LEAST ONE TEMPERAMENT IS REQUIRED',
             },
-        };
-    };
-
-    componentDidMount() {
-        this.setState({
-            ...this.state,
-            errors: validateInput(this.state),
         });
     };
 
@@ -91,42 +106,47 @@ class Form extends React.Component {
     };
 
     handleSubmit = (e) => {
+        if (this.props.card?.id) {
+            this.handleEdit(e);
+            return;
+        };
         e.preventDefault();
         if (!Object.values(this.state.errors).length) {
-            createDog({
-                name: this.state.name,
-                height: this.state.height,
-                weight: this.state.weight,
-                life_span: this.state.life_span,
-                temperaments: this.state.temperaments,
-                image: this.state.image,
-            })(this.props.dispatch);
-            this.setState({
-                name: '',
-                height: '',
-                weight: '',
-                life_span: '',
-                temperaments: [],
-                image: '',
-                errors: {
-                    name: 'NAME IS REQUIRED',
-                    height: 'HEIGHT IS REQUIRED',
-                    weight: 'WEIGHT IS REQUIRED',
-                    life_span: 'LIFE SPAN IS REQUIRED',
-                    image: 'IMAGE IS REQUIRED',
-                    temperaments: 'AT LEAST ONE TEMPERAMENT IS REQUIRED',
-                },
-            });
+            this.props.createDog(
+                this.state
+            );
+            this.resetState();
             alert('Dog created successfully!');
-            // dispatch loadDogs
-            loadDogs()(this.props.dispatch);
+            this.props.loadDogs();
+            this.props.history.push('/home');
         }
         else {
             alert('Please fill all the fields correctly');
         };
     };
 
+    handleEdit = (e) => {
+        e.preventDefault();
+        if (!Object.values(this.state.errors).length) {
+            this.props.modifyDog({
+                name: this.state.name,
+                height: this.state.height,
+                weight: this.state.weight,
+                life_span: this.state.life_span,
+                temperaments: this.state.temperaments,
+                image: this.state.image,
+            });
+            this.resetState();
+            alert('Dog modified successfully!');
+            this.props.loadDogs();
+            this.props.history.push('/home');
+        } else {
+            alert('Please fill all the fields correctly');
+        }
+    };
+
     render() {
+        let button_text = this.props.card?.id ? 'Edit' : 'Create';
         return (
             <div id="form-container">
                 <form onSubmit={this.handleSubmit}>
@@ -244,7 +264,7 @@ class Form extends React.Component {
                     </div>
                     <div id="form-buttons">
                         <div id="input-div">
-                            <button type="submit">Create Dog</button>
+                            <button type="submit">{button_text} Dog</button>
                         </div>
                     </div>
                 </form>
@@ -266,5 +286,13 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createDog: (dog) => dispatch(createDog(dog)),
+        loadDogs: () => dispatch(loadDogs()),
+        modifyDog: (dog) => dispatch(modifyDog(dog)),
+    };
+};
 
-export default connect(mapStateToProps)(Form);
+
+export default withHistory(connect(mapStateToProps, mapDispatchToProps)(Form));

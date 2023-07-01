@@ -24,3 +24,4 @@ export const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const GO_FIRST_PAGE = 'GO_FIRST_PAGE';
 export const GO_LAST_PAGE = 'GO_LAST_PAGE';
+export const SET_FILTER_NAME = 'SET_FILTER_NAME';

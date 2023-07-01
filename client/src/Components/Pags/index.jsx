@@ -33,7 +33,9 @@ class Pags extends React.Component {
                                 <Card
                                     card={card}
                                     key={card.id}
-                                    deleteHandler={this.props.deleteHandler} />
+                                    deleteHandler={this.props.deleteHandler}
+                                    updateHomeStatus={this.props.updateStatus}
+                                />
                             ))}
                     </div>
                 </div>

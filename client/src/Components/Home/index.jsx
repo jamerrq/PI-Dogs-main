@@ -15,7 +15,7 @@ import {
     setTotalPages, searchByName,
     clearDogDetail, loadDogs,
     filterByTemperament, filterByOrigin,
-    orderBy, deleteDog
+    orderBy, deleteDog, setFilterName
 } from '../../Redux/actions';
 
 // withRouter
@@ -42,6 +42,15 @@ class Home extends React.Component {
         this.filterHandler = this.filterHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
 
+        // this.updateState(true);
+
+    };
+
+    async componentDidMount() {
+        // console.log('Home mounted!');
+        await this.props.loadDogs();
+        await this.props.firstPage();
+        await this.updateState(true);
     };
 
     updateState = async (updatePages = false) => {
@@ -58,7 +67,7 @@ class Home extends React.Component {
             currentPage: this.props.currentPage,
             totalPages: this.props.totalPages,
         });
-        console.log('STATUS UPDATED!');
+        // console.log('STATUS UPDATED!');
     };
 
     // Handler for the search bar
@@ -73,25 +82,23 @@ class Home extends React.Component {
     // Handler for the search button
     searchHandler = async (name) => {
         await this.props.clearDogDetail();
-        // console.log('HERE!');
         try {
             await this.props.searchByName(name);
         }
-        catch (err) {
-            // console.log('ERROR:', err);
-            alert('Dog not found');
-            await this.props.clearDogDetail();
-            await this.props.loadDogs();
-            await this.props.firstPage();
-            await this.updateState(true);
-            return 1;
-        }
+        catch {
+            // Do nothing
+        };
         if (this.props.dogDetail.id) {
             let id = this.props.dogDetail.idApi || this.props.dogDetail.id;
             // navigate to detail page
             this.props.history.push(`/detail/${id}`);
         } else {
-            alert('Dog not found');
+            // alert('Dog not found!');
+            this.props.history.push(`/notfound`);
+            this.props.clearDogDetail();
+            this.props.loadDogs();
+            this.props.firstPage();
+            this.props.setFilterName('');
         };
 
         // change state
@@ -181,6 +188,7 @@ class Home extends React.Component {
                     currentPage={this.state.currentPage}
                     totalPages={this.state.totalPages}
                     deleteHandler={this.deleteHandler}
+                    updateState={this.updateState}
                 ></Pags>
                 <Footer />
             </div>
@@ -219,6 +227,7 @@ const mapDispatchToProps = (dispatch) => {
         filterByOrigin: (origin) => dispatch(filterByOrigin(origin)),
         orderBy: (order) => dispatch(orderBy(order)),
         deleteDog: (id) => dispatch(deleteDog(id)),
+        setFilterName: (name) => dispatch(setFilterName(name)),
     };
 };
 

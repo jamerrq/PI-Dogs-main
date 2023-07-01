@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 // Icons
 import { TbListDetails } from 'react-icons/tb';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { FiEdit } from 'react-icons/fi';
 
 // Redux
 import { connect } from 'react-redux';
@@ -20,7 +21,6 @@ class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // Card State
             card: this.props.card,
         };
         this.ownDeleteDog = this.ownDeleteDog.bind(this);
@@ -34,11 +34,7 @@ class Card extends React.Component {
     };
 
     render() {
-        // console.log(this.state.card);
         let origin = isNaN(this.state.card.id) ? 'api' : 'db';
-        // console.log('origin: ', origin);
-        // console.log('id: ', this.state.card.id);
-        // console.log('isNaN: ', isNaN(this.state.card.id));
         let cardClass = 'card' + (origin !== 'db' ? ' bd' : '');
         let splitTemperaments = this.state.card.temperament?.split(', ');
         let ntemperaments = splitTemperaments?.length;
@@ -74,6 +70,17 @@ class Card extends React.Component {
                             <RiDeleteBin5Line />
                         </button>
                     }
+                    {
+                        origin !== 'db' &&
+                        <NavLink to={`/edit/${this.state.card.id}`}>
+                            <button
+                                className='card-btn'
+                                aria-label='edit-button'
+                            >
+                                <FiEdit />
+                            </button>
+                        </NavLink>
+                    }
                 </div>
                 <div className="card-info-div">
                     <h3>{this.state.card.name}</h3>
@@ -81,8 +88,11 @@ class Card extends React.Component {
                         {
                             splitTemperaments?.map((temperament, index) => {
                                 return (
-                                    <h4 className={"temp-individual-container i" + index}
-                                        key={index} > {temperament}</h4>
+                                    <h4
+                                        className=
+                                        {"temp-individual-container i" + index}
+                                        key={index} > {temperament}
+                                    </h4>
                                 );
                             })
                         }

@@ -169,3 +169,10 @@ export const searchByName = (name) => async (dispatch) => {
         payload: dogs[0],
     });
 };
+
+export const setFilterName = (name) => (dispatch) => {
+    return dispatch({
+        type: actions.SET_FILTER_NAME,
+        payload: name,
+    });
+};

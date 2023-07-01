@@ -14,8 +14,9 @@ router.put('/:id', async (req, res) => {
     // console.log(req.body);
 
     // Se tiene que recibir al menos un campo para modificar
-    if (!name && !height && !weight && !life_span && !image)
+    if (!name && !height && !weight && !life_span && !image) {
         return res.status(400).json({ error: 'Missing required fields' });
+    };
 
     try {
         // Buscamos el perro por ID

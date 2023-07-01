@@ -22,7 +22,6 @@ class Footer extends React.Component {
                 <SiRedux />&nbsp;
                 <SiJavascript />&nbsp;
                 <SiExpress />&nbsp;
-                {/* <FaGithub />&nbsp; */}
                 <SiSequelize />&nbsp;
                 <SiPostgresql />&nbsp;
                 <TbBrandGithubCopilot />&nbsp;

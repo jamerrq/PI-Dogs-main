@@ -5,6 +5,8 @@ import Landing from './Components/Landing';
 import Home from './Components/Home';
 import Detail from './Components/Cards/Detail';
 import Form from './Components/Form';
+import Edit from './Components/Edit';
+import NotFound from './Components/NotFound';
 // Routes stuff
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -29,6 +31,8 @@ function App() {
                     <Route exact path="/home" component={Home} />
                     <Route path="/detail/:id" component={Detail}></Route>
                     <Route path="/create" component={Form}></Route>
+                    <Route path="/edit/:id" component={Edit}></Route>
+                    <Route path="*" component={NotFound}></Route>
                 </Switch>
             </Router>
         </div>
