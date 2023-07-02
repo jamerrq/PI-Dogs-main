@@ -7,13 +7,13 @@ footer {
     height: 30px;
     color: black;
     text-align: center;
-    font-family: 'Fira Sans';
+    font-family: 'Fira Mono';
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: medium;
     margin-top: 15px;
-    font-weight: 560;
+    font-weight: bold;
 }
 
 

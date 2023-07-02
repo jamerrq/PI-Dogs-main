@@ -92,9 +92,17 @@ p[class=temperaments] {
     height: 100%;
     margin: 0 auto;
     padding: 10px;
-    background-color: blanchedalmond;
+    /* background: url('https://i.redd.it/q7ag7qwcxxf81.jpg'); */
+    background: url('https://i.redd.it/1n6a6zuy7jl41.jpg');
+    /* background: url('https://i.redd.it/h55w432gc9x41.jpg'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    transition: background-image 0.5s ease-in-out;
     gap: 10px;
     border-radius: 5px;
+    color: white;
+    /* font-weight: bold; */
 }
 
 #detail-container img {
