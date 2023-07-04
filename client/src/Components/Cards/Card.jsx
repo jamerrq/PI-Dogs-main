@@ -38,7 +38,7 @@ class Card extends React.Component {
         let cardClass = 'card' + (origin !== 'db' ? ' bd' : '');
         let splitTemperaments = this.state.card.temperament?.split(', ');
         let ntemperaments = splitTemperaments?.length;
-        const maxTemperaments = 10;
+        const maxTemperaments = 8;
         if (ntemperaments > maxTemperaments) {
             splitTemperaments = splitTemperaments.slice(0, maxTemperaments);
             splitTemperaments.push('...');
@@ -83,7 +83,7 @@ class Card extends React.Component {
                     }
                 </div>
                 <div className="card-info-div">
-                    <h3>{this.state.card.name}</h3>
+                    <h3>{this.state.card.name.toUpperCase()}</h3>
                     <div id="card-temperaments-container">
                         {
                             splitTemperaments?.map((temperament, index) => {

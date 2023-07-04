@@ -23,6 +23,11 @@ const validateUUID = (uuid) => {
 
 const filteredByTemperament = (dogs, temperament) => {
     if (!temperament || temperament === 'all') return dogs;
+    // console.log('Dogs: ', dogs);
+    // console.log('temp filter: ', temperament);
+    console.log('Filtered by temperament');
+    console.log('Dogs: ', dogs?.length);
+    console.log('temp filter: ', temperament);
     const filteredByTemperament = dogs.filter(dog => {
         // console.log('dog temperament', dog.temperament);
         return dog.temperament?.includes(temperament);
@@ -51,8 +56,10 @@ const orderedByName = (dogs, direction) => {
     // Direction: asc, desc
     const orderedByName = [...dogs].sort((a, b) => {
         // eslint-disable-next-line no-unused-vars
-        if (a.name > b.name) return direction === 'asc' ? 1 : -1;
-        if (a.name < b.name) return direction === 'asc' ? -1 : 1;
+        if (a.name.toLowerCase() > b.name.toLowerCase())
+            return direction === 'asc' ? 1 : -1;
+        if (a.name.toLowerCase() < b.name.toLowerCase())
+            return direction === 'asc' ? -1 : 1;
         return 0;
     });
     return orderedByName;
@@ -97,6 +104,12 @@ const filteredByName = (dogs, name) => {
 
 const filterAndOrder = (dogs, { tempFilter, originFilter, nameFilter,
     orderBy, orderDirection }) => {
+    console.log('filterAndOrder');
+    console.log('tempFilter', tempFilter);
+    console.log('originFilter', originFilter);
+    console.log('nameFilter', nameFilter);
+    console.log('orderBy', orderBy);
+    console.log('orderDirection', orderDirection);
     let filteredDogs = filteredByTemperament(dogs, tempFilter);
     filteredDogs = filteredByOrigin(filteredDogs, originFilter);
     filteredDogs = filteredByName(filteredDogs, nameFilter);
@@ -138,11 +151,11 @@ function reducer(state = initialState, action) {
         case actions.FILTER_BY_TEMPERAMENT:
             return {
                 ...state,
+                tempFilter: action.payload,
                 filteredDogs: filterAndOrder(state.allDogs, {
                     ...state,
                     tempFilter: action.payload,
                 }),
-                tempFilter: action.payload,
             };
 
         case actions.FILTER_BY_ORIGIN:

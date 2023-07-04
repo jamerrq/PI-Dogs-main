@@ -32,8 +32,6 @@ class Home extends React.Component {
             cards: this.props.filteredDogs,
             currentPage: this.props.currentPage,
             totalPages: Math.ceil(this.props.filteredDogs.length / 8),
-            tempFilterTrigger: false,
-            originFilterTrigger: false,
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -92,6 +90,9 @@ class Home extends React.Component {
             let id = this.props.dogDetail.idApi || this.props.dogDetail.id;
             // navigate to detail page
             this.props.history.push(`/detail/${id}`);
+            // clear dog detail and clear search bar
+            this.props.clearDogDetail();
+            this.props.setFilterName('');
         } else {
             // alert('Dog not found!');
             this.props.history.push(`/notfound`);
@@ -113,43 +114,13 @@ class Home extends React.Component {
     filterHandler = async (type, value) => {
         switch (type) {
             case 'temperament':
-                if (this.state.tempFilterTrigger) {
-                    await this.props.loadDogs();
-                    if (this.state.originFilterTrigger) {
-                        await this.props.filterByOrigin(
-                            this.props.originFilter
-                        );
-                    };
-                    await this.props.firstPage();
-                    this.setState({
-                        tempFilterTrigger: false,
-                    });
-                };
                 await this.props.filterByTemperament(value);
-                this.setState({
-                    tempFilterTrigger: true,
-                });
                 await this.updateState(true);
                 await this.props.firstPage();
                 break;
             case 'origin':
-                if (this.state.originFilterTrigger) {
-                    await this.props.loadDogs();
-                    if (this.state.tempFilterTrigger) {
-                        await this.props.filterByTemperament(
-                            this.props.tempFilter
-                        );
-                    };
-                    await this.props.firstPage();
-                    this.setState({
-                        originFilterTrigger: false,
-                    });
-                };
                 await this.props.filterByOrigin(value);
                 await this.updateState(true);
-                this.setState({
-                    originFilterTrigger: true,
-                });
                 await this.props.firstPage();
                 break;
             default:

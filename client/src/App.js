@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 // Redux actions
 import * as actions from './Redux/actions';
 
+
 function App() {
 
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
             </Router>
         </div>
     );
+
 };
 
 
