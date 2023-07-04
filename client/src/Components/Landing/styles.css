@@ -33,7 +33,7 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.landing button {
+#landing-button {
     margin: 10px;
     padding: 20px;
     border-radius: 5px;
@@ -43,7 +43,7 @@ html {
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
-    font-family: sans-serif;
+    font-family: "Fira Sans";
     display: flex;
     justify-content: center;
     align-items: center;

@@ -18,7 +18,7 @@ class Landing extends React.Component {
             <div className='landing'>
                 {/* <h1 className='title'>LANDING PAGE</h1> */}
                 <NavLink to='/home'>
-                    <button><TbDog />&nbsp;GO HOME&nbsp;<TbDog /></button>
+                    <button id="landing-button"><TbDog />&nbsp;GO HOME&nbsp;<TbDog /></button>
                 </NavLink>
             </div>
         );
