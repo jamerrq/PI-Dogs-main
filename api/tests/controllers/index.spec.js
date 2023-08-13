@@ -2,7 +2,7 @@ const { getAllDogs, getDogsApi, getDogsDb, } = require('../../src/controllers/lo
 const { expect } = require('chai');
 const { API_ELEMS } = process.env;
 const { Dog, conn } = require('../../src/db.js');
-const { get } = require('../../src/routes');
+const { before } = require('mocha');
 
 
 const dogExample = {

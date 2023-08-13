@@ -1,5 +1,5 @@
 const { Dog, conn } = require('../../src/db.js');
-const { expect } = require('chai');
+const { before } = require('mocha');
 
 
 describe('Dog model', () => {
@@ -63,4 +63,5 @@ describe('Dog model', () => {
             });
         });
     });
+
 });

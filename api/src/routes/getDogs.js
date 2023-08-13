@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
             if (dogsFiltered.length === 0)
                 return res.status(404).json({ error: 'Dogs not found' });
             return res.status(200).json(dogsFiltered);
-        };
+        }
         return res.status(200).json(dogs);
     }
     catch (error) {
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
             message: 'Internal server error',
             error
         });
-    };
+    }
 });
 
 
@@ -57,7 +57,7 @@ router.get('/:idRaza', async (req, res) => {
             message: 'Internal server error',
             error
         });
-    };
+    }
 });
 
 

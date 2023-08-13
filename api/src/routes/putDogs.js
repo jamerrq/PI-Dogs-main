@@ -16,7 +16,7 @@ router.put('/:id', async (req, res) => {
     // Se tiene que recibir al menos un campo para modificar
     if (!name && !height && !weight && !life_span && !image) {
         return res.status(400).json({ error: 'Missing required fields' });
-    };
+    }
 
     try {
         // Buscamos el perro por ID
@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
             message: 'Internal server error',
             error
         });
-    };
+    }
 });
 
 

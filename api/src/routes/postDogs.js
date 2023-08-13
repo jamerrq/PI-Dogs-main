@@ -24,19 +24,21 @@ router.post('/', async (req, res) => {
             image
         });
         // Creamos los temperamentos que no existan
-        const temperamentsCreated = await Promise.all(temperaments.map(async temperament => {
-            const [temperamentCreated] = await Temperament.findOrCreate({
-                where: {
-                    name: temperament
-                }
-            });
-            return temperamentCreated;
-        }));
+        const temperamentsCreated = await Promise.all(temperaments
+            .map(async temperament => {
+                const [temperamentCreated] = await Temperament.findOrCreate({
+                    where: {
+                        name: temperament
+                    }
+                });
+                return temperamentCreated;
+            }));
         // Asociamos los temperamentos al perro
         await dog.addTemperaments(temperamentsCreated);
         const dogWithTemperaments = {
             ...dog.dataValues,
-            temperaments: temperamentsCreated.map(temperament => temperament.name).join(', '),
+            temperaments: temperamentsCreated.map(temperament =>
+                temperament.name).join(', '),
         };
         return res.status(201).json(dogWithTemperaments);
     }
@@ -46,7 +48,7 @@ router.post('/', async (req, res) => {
             message: 'Internal server error',
             error
         });
-    };
+    }
 });
 
 

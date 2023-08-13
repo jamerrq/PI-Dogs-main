@@ -1,9 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
+const { expect } = require('mocha');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Dog, conn } = require('../../src/db.js');
 const { API_ELEMS } = process.env;
+const { before } = require('mocha');
 
 
 const agent = session(app);

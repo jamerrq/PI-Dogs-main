@@ -8,7 +8,6 @@ let dogsApi = [];
 let dogsDb = [];
 let temperaments = [];
 let apiInfoLoaded = false;
-// let dbInfoLoaded = false;
 
 
 const testingDog = {
@@ -47,7 +46,7 @@ const getDogsApi = async () => {
         console.log('Error in getDogsApi()');
         console.log(error);
         return [];
-    };
+    }
 
 };
 
@@ -67,14 +66,12 @@ const getDogsDb = async () => {
                 },
             ],
         });
-        // console.log('dogsDb', dogsDb);
-        dbInfoLoaded = true;
         return dogsDb;
     } catch (error) {
         console.log('Error in getDogsDb()');
         console.log(error);
         return [];
-    };
+    }
 
 };
 
@@ -87,7 +84,7 @@ const getAllDogs = async () => {
             console.log('TESTING ENVIRONMENT');
             await Dog.create(testingDog);
             console.log('TESTING DOG CREATED');
-        };
+        }
         const dogsApi = await getDogsApi();
         const dogsDb = await getDogsDb();
         // console.log('dogsApi', dogsApi);
@@ -118,7 +115,7 @@ const getAllDogs = async () => {
         console.log('Error in getAllDogs()');
         console.log(error);
         return [];
-    };
+    }
 
 };
 

@@ -23,7 +23,7 @@ router.delete('/:id', async (req, res) => {
             message: 'Internal server error',
             error
         });
-    };
+    }
 });
 
 
