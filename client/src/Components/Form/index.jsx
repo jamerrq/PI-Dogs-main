@@ -9,6 +9,8 @@ import { NavLink } from 'react-router-dom';
 // History
 import { withHistory } from '../withRouter';
 
+const valuesRegex = /^(\d{1,3} - \d{1,3}|\d{1,3})( years)?$/;
+
 const validateInput = (input) => {
     let errors = {};
     if (!input.name) {
@@ -26,6 +28,19 @@ const validateInput = (input) => {
     if (!input.temperaments.length) {
         errors.temperaments = 'AT LEAST ONE TEMPERAMENT IS REQUIRED';
     };
+    if (!input.image) {
+        errors.image = 'IMAGE IS REQUIRED';
+    };
+    if (!valuesRegex.test(input.height)) {
+        errors.height = 'HEIGHT MUST BE IN FORMAT number - number or number';
+    };
+    if (!valuesRegex.test(input.weight)) {
+        errors.weight = 'WEIGHT MUST BE IN FORMAT number - number or number';
+    };
+    if (!valuesRegex.test(input.life_span)) {
+        errors.life_span = 'LIFE SPAN MUST BE IN FORMAT number - number years' +
+            ' or number years';
+    };
     return errors;
 };
 
@@ -39,7 +54,7 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: props.card?.name || '@HENRY',
+            name: '@HENRY',
             height: props.card?.height || '100 - 200',
             weight: props.card?.weight || '1 - 2',
             life_span: props.card?.life_span || '1 - 2 years',

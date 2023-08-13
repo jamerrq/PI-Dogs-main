@@ -14,7 +14,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Axios defaults
 import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:3001';
-axios.defaults.baseURL = 'https://pi-dogs-main-production-df34.up.railway.app/';
+axios.defaults.baseURL = 'https://pi-dogs-wrgc.onrender.com';
 
 
 ReactDOM.render(
